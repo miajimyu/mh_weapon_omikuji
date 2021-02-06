@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              setState(() {
+              setState(() async {
                 currentWeapon = initialWeaponLabel;
                 await SharedPreferencesHelper.setCurrentWeapon(currentWeapon);
 
