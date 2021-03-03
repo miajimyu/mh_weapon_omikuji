@@ -80,17 +80,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MyItem(label: currentWeapon),
+          InkWell(
+            onTap: _decideWeapon,
+            child: MyItem(label: currentWeapon),
+          ),
           Text(
             '$currentWeapons',
             style: TextStyle(fontFamily: 'Kosugi'),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _decideWeapon,
-        tooltip: 'Roll',
-        child: const Icon(Icons.casino),
       ),
     );
   }
