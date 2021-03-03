@@ -80,9 +80,24 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          InkWell(
-            onTap: _decideWeapon,
-            child: MyItem(label: currentWeapon),
+          ElevatedButton(
+            onPressed: _decideWeapon,
+            child: AspectRatio(
+              aspectRatio: 10 / 2,
+              child: Center(
+                child: Text(
+                  currentWeapon,
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontFamily: 'Kosugi',
+                  ),
+                ),
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              onPrimary: Colors.blue,
+            ),
           ),
           Text(
             '$currentWeapons',
@@ -106,30 +121,5 @@ class _MyHomePageState extends State<MyHomePage> {
 
     await SharedPreferencesHelper.setCurrentWeapon(currentWeapon);
     await SharedPreferencesHelper.setList(currentWeapons);
-  }
-}
-
-class MyItem extends StatelessWidget {
-  final String label;
-
-  const MyItem({
-    @required this.label,
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 10 / 2,
-      child: Card(
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(fontSize: 32, fontFamily: 'Kosugi'),
-          ),
-        ),
-        shadowColor: Colors.blue,
-      ),
-    );
   }
 }
