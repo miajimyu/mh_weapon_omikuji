@@ -62,17 +62,18 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.delete),
-            onPressed: () {
-              setState(() async {
+            onPressed: () async {
+              setState(() {
                 currentWeapon = initialWeaponLabel;
-                await SharedPreferencesHelper.setCurrentWeapon(currentWeapon);
 
                 currentWeapons
                   ..clear()
                   ..addAll(weapons);
-                await SharedPreferencesHelper.clearAll();
-                await SharedPreferencesHelper.setList(weapons);
               });
+
+              await SharedPreferencesHelper.clearAll();
+              await SharedPreferencesHelper.setCurrentWeapon(currentWeapon);
+              await SharedPreferencesHelper.setList(weapons);
             },
           )
         ],
