@@ -1,11 +1,35 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:mh_weapon_omikuji/helper/shared_preferences_helper.dart';
 
 import 'constans.dart';
 
-void main() {
+void main() async {
+  if (!kIsWeb) {
+    WidgetsFlutterBinding.ensureInitialized();
+    await windowManager.ensureInitialized();
+
+    // Window Option
+    const _size = Size(410, 230);
+    WindowOptions windowOptions = WindowOptions(
+      size: _size,
+      minimumSize: _size,
+      maximumSize: _size,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      alwaysOnTop: true,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.setAlignment(Alignment.bottomRight);
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
   runApp(MyApp());
 }
 
